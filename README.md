@@ -1,7 +1,7 @@
 # Tabula_Muris_Processing_single_cell_RNAseq
 Pipeline for processing and analyzing single cell RNAseq data
 
-Key steps of our analysis are presented below. Please also refer to our manuscript regarding other analyses not online. For technical details please contact Tianyuan Lu (tianyuan.lu@mail.mcgill.ca) or Dr. Jessica C. Mar (j.mar@uq.edu.au).
+Key steps of our analysis are explained below. Please also refer to our manuscript regarding other analyses not online. For technical details please contact Tianyuan Lu (tianyuan.lu@mail.mcgill.ca) or Dr. Jessica C. Mar (j.mar@uq.edu.au).
 
 ### Preprocessing
 ---
@@ -33,12 +33,12 @@ Please refer to https://github.com/Vivianstats/scImpute for more instructions. I
 ---
 Normalization of imputed data can be performed using the following code in R:
 
-		brain <- readRDS("BrainImputed.rds")
 		heart <- readRDS("HeartImputed.rds")
+		brain <- readRDS("BrainImputed.rds")
 		Seuseth <- NormalizeData(object=seuseth, normalization.method="LogNormalize")
 		Seusetb <- NormalizeData(object=seusetb, normalization.method="LogNormalize")
-		SEUSETB <- FindVariableGenes(object=Seusetb, mean.function=ExpMean, dispersion.function=LogVMR, x.low.cutoff=0.0125, x.high.cutoff=3, y.cutoff=0.5)
 		SEUSETH <- FindVariableGenes(object=Seuseth, mean.function=ExpMean, dispersion.function=LogVMR, x.low.cutoff=0.0125, x.high.cutoff=3, y.cutoff=0.5)
+		SEUSETB <- FindVariableGenes(object=Seusetb, mean.function=ExpMean, dispersion.function=LogVMR, x.low.cutoff=0.0125, x.high.cutoff=3, y.cutoff=0.5)
 		heartHVG <- heart[SEUSETH@var.genes,]
 		brainHVG <- brain[SEUSETB@var.genes,]
 
@@ -63,3 +63,27 @@ GSVA can be performed using the R package "GSVA"
 where the "Mus.gmt" describing gene sets has been provided.
 
 ### PANDA network
+---
+Construction of PANDA network ensembles can be achieved step by step.
+
+1. Remove genes on sex chromosomes and get genes documented in TF-gene motifs.
+
+2. Separate samples by condition, which in our study is gender:
+
+		python3 heart_separate_gender.py
+		python3 brain_separate_gender.py
+
+Please prepare required imputed, normalized, sex-chromosome-removed and motif-matched counts data and corresponding annotation files.
+
+3. Prepare samples for PANDA network ensemble by Jack-knife method
+
+		python3 heart_random_split.py
+		python3 brain_random_split.py
+
+Required files have been provided.
+
+4. Constructing PANDA networks using PANDA scripts in Matlab.
+
+Please refer to https://sites.google.com/a/channing.harvard.edu/kimberlyglass/tools/panda for exhaustive instructions.
+
+Motif files and PPI files have been provided in the "forPANDA" folder.
