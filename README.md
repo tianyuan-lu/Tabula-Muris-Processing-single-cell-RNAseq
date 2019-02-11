@@ -1,12 +1,23 @@
 # Tabula_Muris_Processing_single_cell_RNAseq
 Pipeline for processing and analyzing single cell RNAseq data
+
+Key steps of our analysis are presented below. Please also refer to our manuscript regarding other analyses not online. For technical inquiries please contact Tianyuan Lu (tianyuan.lu@mail.mcgill.ca) or Dr. Jessica C. Mar (j.mar@uq.edu.au).
+
 ### Preprocessing
+---
+Raw counts data can be retrived from the Tabula Muris study at https://github.com/czbiohub/tabula-muris.
+
+These data can be preprocessed by
+
+		Rscript preprocessing.R celltype_annot.tsv
+
+where **celltype_annot.tsv** can be found in the "CellTypeAnnotation" folder. Change "tissue" in line 5 of the script to "Brain"/"Heart" or any other desired tissue.
 
 ### Imputation
 ---
 Imputation of the filtered data can be performed by scImpute.
 
-		scimpute(count_path = "/path/to/unimputedfile" 
+		scimpute(count_path = "/path/to/filteredfile" 
          	         infile = "csv",           
          		 outfile = "csv",          
          		 out_dir = "/path/to/output/directory",         
