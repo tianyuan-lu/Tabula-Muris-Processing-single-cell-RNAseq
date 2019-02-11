@@ -1,7 +1,7 @@
 # Tabula_Muris_Processing_single_cell_RNAseq
 Pipeline for processing and analyzing single cell RNAseq data
 
-Key steps of our analysis are presented below. Please also refer to our manuscript regarding other analyses not online. For technical inquiries please contact Tianyuan Lu (tianyuan.lu@mail.mcgill.ca) or Dr. Jessica C. Mar (j.mar@uq.edu.au).
+Key steps of our analysis are presented below. Please also refer to our manuscript regarding other analyses not online. For technical details please contact Tianyuan Lu (tianyuan.lu@mail.mcgill.ca) or Dr. Jessica C. Mar (j.mar@uq.edu.au).
 
 ### Preprocessing
 ---
@@ -13,9 +13,11 @@ These data can be preprocessed by
 
 where **celltype_annot.tsv** can be found in the "CellTypeAnnotation" folder. Change "tissue" in line 5 of the script to "Brain"/"Heart" or any other desired tissue.
 
+Gene model ("TM_gene_genomic_info.tsv") of mm10 is based on UCSC genome browser and supplied to the script.
+
 ### Imputation
 ---
-Imputation of the filtered data can be performed by scImpute.
+Imputation of the filtered data can be performed by the "scImpute" R package.
 
 		scimpute(count_path = "/path/to/filteredfile" 
          	         infile = "csv",           
@@ -43,6 +45,12 @@ Normalization of imputed data can be performed using the following code in R:
 Loading the "Seurat" R package is necessary. Normalized data are stored in the **Seuseth** and **Seusetb** objects.
 
 ### Identification of differential distribution
+---
+Genes having differentially distributed expression patterns can be identified using the "scDD" R package.
+
+		Rscript scDD.R
+	
+This script takes in the annotation files in the "CellTypeAnnotation" folder and the imputed and normalized read counts obtained in the last step. Change "celltype" in line 7 & 19 and "tissue" in line 8 accordingly. The outputs are cell type-specific results.
 
 ### Gene set variation analysis
 ---
