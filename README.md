@@ -87,3 +87,11 @@ Required files have been provided.
 Please refer to https://sites.google.com/a/channing.harvard.edu/kimberlyglass/tools/panda for exhaustive instructions.
 
 Motif files and PPI files have been provided in the "forPANDA" folder.
+
+5. Differentially represented edges, differentially targeting TFs and differentially targeted genes can be tested using
+
+		python3 Edge_t_test.py edges.pairs male_output female_output
+		python3 get_out_degree.py PANDA_output
+		python3 get_in_degree.py PANDA_output
+
+Edges.pairs files are provided in the "forPANDA" folder for heart and brain respectively. Note that outputs of the first t test have not been adjusted for multiple testing, and this should be done additionally. 
