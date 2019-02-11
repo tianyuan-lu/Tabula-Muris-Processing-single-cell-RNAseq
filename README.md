@@ -3,10 +3,22 @@ Pipeline for processing and analyzing single cell RNAseq data
 ### Preprocessing
 
 ### Imputation
+---
+Imputation of the filtered data can be performed by scImpute.
+
+		scimpute(count_path = "/path/to/unimputedfile" 
+         	         infile = "csv",           
+         		 outfile = "csv",          
+         		 out_dir = "/path/to/output/directory",         
+         		 drop_thre = 0.5,          # threshold set on dropout probability
+         		 Kcluster = number_of_clusters,             # number of cell populations; in our study, 4 for brain cells and 6 for heart cells
+         		 ncores = 10)              
+
+Please refer to https://github.com/Vivianstats/scImpute for more instructions. Imputed data have been provided in rds format.
 
 ### Normalization
 ---
-Normalization of imputed data was performed using the following code:
+Normalization of imputed data can be performed using the following code in R:
 
 		brain <- readRDS("BrainImputed.rds")
 		heart <- readRDS("HeartImputed.rds")
