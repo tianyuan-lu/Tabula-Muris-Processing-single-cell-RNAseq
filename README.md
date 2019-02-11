@@ -34,5 +34,13 @@ Loading the "Seurat" R package is necessary. Normalized data are stored in the *
 ### Identification of differential distribution
 
 ### Gene set variation analysis
+---
+GSVA can be performed using the R package "GSVA"
+
+		exp <- as.matrix(read.table("expression_matrix", header=T, row.names=1))
+		gset <- getGmt("Mus.gmt")
+		GSVAresult <- gsva(exp,gset)
+
+where the "Mus.gmt" describing gene sets has been provided.
 
 ### PANDA network
