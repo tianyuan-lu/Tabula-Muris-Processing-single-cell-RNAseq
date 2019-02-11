@@ -13,7 +13,7 @@ leuko=[]
 smoom=[]
 
 counts = pandas.read_csv(open("female_all_heart.tsv"),delimiter="\t",index_col=0)
-annot = csv.reader(open("sample_tissue_female.txt"),delimiter="\t")
+annot = csv.reader(open("heart_sample_tissue_female.txt"),delimiter="\t")
 
 for line in annot:
     if line[1]=="cardiac_muscle_cell": card.append(line[0])
