@@ -10,8 +10,8 @@ endo=[]
 micro=[]
 oligo=[]
 
-counts = pandas.read_csv(open("male_all_brain.tsv"),delimiter="\t",index_col=0)
-annot = csv.reader(open("sample_tissue_male.txt"),delimiter="\t")
+counts = pandas.read_csv(open("female_all_brain.tsv"),delimiter="\t",index_col=0)
+annot = csv.reader(open("sample_tissue_female.txt"),delimiter="\t")
 
 for line in annot:
     if line[1]=="astrocyte_of_the_cerebral_cortex": astro.append(line[0])
