@@ -37,6 +37,8 @@ Normalization of imputed data can be performed using the following code in R:
 		brain <- readRDS("BrainImputed.rds")
 		Seuseth <- NormalizeData(object=seuseth, normalization.method="LogNormalize")
 		Seusetb <- NormalizeData(object=seusetb, normalization.method="LogNormalize")
+		Seuseth <- RunFastMNN(object.list = SplitObject(Seuseth, split.by = "sample"))
+		Seusetb <- RunFastMNN(object.list = SplitObject(Seusetb, split.by = "sample"))
 		SEUSETH <- FindVariableGenes(object=Seuseth, mean.function=ExpMean, dispersion.function=LogVMR, x.low.cutoff=0.0125, x.high.cutoff=3, y.cutoff=0.5)
 		SEUSETB <- FindVariableGenes(object=Seusetb, mean.function=ExpMean, dispersion.function=LogVMR, x.low.cutoff=0.0125, x.high.cutoff=3, y.cutoff=0.5)
 		heartHVG <- heart[SEUSETH@var.genes,]
